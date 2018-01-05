@@ -1,8 +1,9 @@
 const Person = require('./../dev/js/logic.js').personModule;
 
-describe( 'Person' function(){
+describe( 'Person', function(){
 	it('should calculate users age in earth years', function(){
-
+		const person = new Person(35);
+		expect(person.earthYears).toEqual(25);
 	});
 	it('should convert age into minutes', function(){
 
