@@ -3,3 +3,5 @@ class Person {
 		this.EarthYears = age;
 	}
 }
+
+exports.personModule = Person;
