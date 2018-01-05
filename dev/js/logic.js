@@ -2,10 +2,10 @@ class Person {
 	constructor(birthDay){
 		this.earthSeconds = this.ageSeconds(birthDay); //birthday enters constructor as ms from epoch
 		this.earthYears = this.yearRnd();
-		this.mercuryYears = this.earthYears / .24;
-		this.venusYears = this.earthYears / .62;
-		this.marsYears = this.earthYears / 1.88;
-		this.jupiterYears = this.earthYears / 11.86;
+		this.mercuryYears = Math.round(10 * (this.earthYears / .24)) / 10;
+		this.venusYears = Math.round(10 * (this.earthYears / .62)) / 10;
+		this.marsYears = Math.round(10 * (this.earthYears / 1.88)) / 10;
+		this.jupiterYears = Math.round(10 * (this.earthYears / 11.86)) / 10;
 	}
 
 	ageSeconds(bDay){
