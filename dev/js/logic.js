@@ -7,7 +7,7 @@ class Person {
 		this.venusYears = Math.round(10 * (this.earthYears / .62)) / 10;
 		this.marsYears = Math.round(10 * (this.earthYears / 1.88)) / 10;
 		this.jupiterYears = Math.round(10 * (this.earthYears / 11.86)) / 10;
-		this.lifeExpectancy = lifeExp(day, place)
+		this.lifeExpectancy = this.lifeExp(day, place);
 	}
 
 	ageSeconds(bDay){
@@ -23,10 +23,10 @@ class Person {
 
 	lifeExp(day, place){
 		const now = 2018;
-		const birthYear = day / 31556926000 + 1970;
+		const birthYear = Math.floor(day / 31556926000) + 1970;
 		const worldAverageNow = 70;
 		const locationMod = {
-			"United States" : 10,
+			"North America" : 10,
 			"Latin America" : 4,
 			"Asia" : -1,
 			"Africa" : -5
@@ -34,5 +34,4 @@ class Person {
 		return worldAverageNow + (birthYear - now) * .24 + locationMod[place];
 	}
 }
-
 exports.personModule = Person;
