@@ -1,0 +1,3 @@
+$(function(){
+	//front end stuff
+});
