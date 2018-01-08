@@ -69,3 +69,7 @@ gulp.task('minify', ['jsBrowserify'], function() {
           .pipe(uglify())
           .pipe(gulp.dest('./build/js'));
 });
+
+gulp.task('default', function(){
+	gulp.start('minify');
+})
