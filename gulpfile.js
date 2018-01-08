@@ -12,7 +12,11 @@ const gulp = require('gulp'),
 		  }
 	  }),
 	uglify = require('gulp-uglify'),
-	concat = require('gulp-concat');
+	concat = require('gulp-concat'),
+	babelify = require('babelify')
+	browserify = require('browserify'),
+	source = require('vinyl-source-stream');
+
 
 
 gulp.task('clean', function(){
@@ -44,7 +48,7 @@ gulp.task('bowerJS', ['bowerCSS'], function(){
 
 //optomize output for all browsers (concat, browserify, babelify, then minify)
 
-gulp.task('concat', ['bowerJS']function(){
+gulp.task('concat', ['bowerJS'], function(){
 	gulp.src(['dev/js/interface.js', 'dev/js/logic.js'])
 		.pipe(concat('concat.js'))
 		.pipe(gulp.dest('./tmp'));
