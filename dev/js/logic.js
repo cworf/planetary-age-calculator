@@ -31,7 +31,7 @@ class Person {
 			"Asia" : -1,
 			"Africa" : -5
 		};
-		return worldAverageNow + (birthYear - now) * .24 + locationMod[place];
+		return worldAverageNow + (birthYear - now) * .24 + locationMod[place]; //.24 is the linear change in life expectancy per birth year
 	}
 }
 exports.personModule = Person;

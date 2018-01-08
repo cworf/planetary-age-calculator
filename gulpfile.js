@@ -19,9 +19,9 @@ gulp.task('clean', function(){
 	del(['tmp', 'dist']);
 });
 
-gulp.task('copyHTML', ['clean'], function(){
-	gulp.src('dev/css/master.css')
-		.pipe(gulp.dest('./dist/css'));
+gulp.task('copyHTML', function(){
+	gulp.src('dev/index.html')
+		.pipe(gulp.dest('./dist'));
 });
 gulp.task('copyCSS', ['copyHTML'], function(){
 	gulp.src('dev/css/master.css')
@@ -34,9 +34,34 @@ gulp.task('bowerCSS', ['copyCSS'], function () {
 		.pipe(gulp.dest('./dist/css'));
 });
 
-// gulp.task('bowerJS', ['bowerCSS'], function(){
-// 	gulp.src(lib.ext('js').files) //grab js
-// 	.pipe(concat('vendor.min.js'))
-// 	.pipe(uglify())
-// 	.pipe(gulp.dest('./dist/js'));
-// });
+gulp.task('bowerJS', ['bowerCSS'], function(){
+	gulp.src(lib.ext('js').files) //grab js
+	.pipe(concat('vendor.min.js'))
+	.pipe(uglify())
+	.pipe(gulp.dest('./dist/js'));
+});
+
+
+//optomize output for all browsers (concat, browserify, babelify, then minify)
+
+gulp.task('concat', ['bowerJS']function(){
+	gulp.src(['dev/js/interface.js', 'dev/js/logic.js'])
+		.pipe(concat('concat.js'))
+		.pipe(gulp.dest('./tmp'));
+});
+
+gulp.task('jsBrowserify', ['concat'], function() {
+	browserify({ entries: ['./tmp/concat.js']})
+		.transform(babelify.configure({
+			presets: ["es2015"]
+		}))
+		.bundle()
+		.pipe(source('app.js'))
+		.pipe(gulp.dest('./dist/js'))
+});
+
+gulp.task('minify', ['jsBrowserify'], function() {
+        return gulp.src('/js/app.js')
+          .pipe(uglify())
+          .pipe(gulp.dest('./build/js'));
+});
