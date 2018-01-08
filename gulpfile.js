@@ -15,7 +15,8 @@ const gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	babelify = require('babelify')
 	browserify = require('browserify'),
-	source = require('vinyl-source-stream');
+	source = require('vinyl-source-stream'),
+	browserSync = require('browser-sync').create();
 
 
 
@@ -72,4 +73,17 @@ gulp.task('minify', ['jsBrowserify'], function() {
 
 gulp.task('default', function(){
 	gulp.start('minify');
+	browserSync.reload();
 })
+
+gulp.task('serve', function() {
+    browserSync.init({
+    	server: {
+        	baseDir: "./dist",
+            index: "index.html"
+        }
+	});
+
+    gulp.watch(['dev/*/*.*', 'dev/index.html'], ['default']);
+
+});
