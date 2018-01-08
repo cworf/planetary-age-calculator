@@ -11,10 +11,13 @@ $(function () {
 		changeYear: true
 	});
 	$('#user-input').submit(function (event) {
-		var birthday = parseInt($('#birthday').val()),
+		event.preventDefault();
+		var birthday = Date.parse($('#birthday').val()),
 		    place = $('#place').val();
+		console.log(birthday);
 		if (birthday && place) {
 			var person = new Person(birthday, place);
+			console.log(person);
 		} else {
 			alert('please fill out all fields');
 		}
