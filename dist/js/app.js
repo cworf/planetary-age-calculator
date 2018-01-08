@@ -1,5 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,7 +8,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 $(function () {
 	$("#birthday").datepicker({
 		changeMonth: true,
-		changeYear: true
+		changeYear: true,
+		yearRange: "1920:2018"
 	});
 	$('#user-input').submit(function (event) {
 		event.preventDefault();
@@ -36,23 +37,24 @@ var Person = function () {
 		this.marsYears = Math.round(10 * (this.earthYears / 1.88)) / 10;
 		this.jupiterYears = Math.round(10 * (this.earthYears / 11.86)) / 10;
 		this.lifeExpectancy = this.lifeExp(day, place);
+		this.alive;
 	}
 
 	_createClass(Person, [{
-		key: 'ageSeconds',
+		key: "ageSeconds",
 		value: function ageSeconds(bDay) {
 			var timeNow = Date.now(); //get current date in ms from epoch
 			var ageSeconds = (timeNow - bDay) / 1000;
 			return ageSeconds;
 		}
 	}, {
-		key: 'yearRnd',
+		key: "yearRnd",
 		value: function yearRnd() {
 			var years = this.earthSeconds / 31556926;
 			return Math.round(10 * years) / 10;
 		}
 	}, {
-		key: 'lifeExp',
+		key: "lifeExp",
 		value: function lifeExp(day, place) {
 			var now = 2018;
 			var birthYear = Math.floor(day / 31556926000) + 1970;
@@ -64,6 +66,15 @@ var Person = function () {
 				"Africa": -5
 			};
 			return worldAverageNow + (birthYear - now) * .24 + locationMod[place]; //.24 is the linear change in life expectancy per birth year
+		}
+	}, {
+		key: "isAlive",
+		value: function isAlive() {
+			if (this.earthYears >= this.lifeExpectancy) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}]);
 

@@ -8,6 +8,7 @@ class Person {
 		this.marsYears = Math.round(10 * (this.earthYears / 1.88)) / 10;
 		this.jupiterYears = Math.round(10 * (this.earthYears / 11.86)) / 10;
 		this.lifeExpectancy = this.lifeExp(day, place);
+		this.alive;
 	}
 
 	ageSeconds(bDay){
@@ -32,6 +33,14 @@ class Person {
 			"Africa" : -5
 		};
 		return worldAverageNow + (birthYear - now) * .24 + locationMod[place]; //.24 is the linear change in life expectancy per birth year
+	}
+	isAlive(){
+		if (this.earthYears >= this.lifeExpectancy) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 }
 exports.personModule = Person;

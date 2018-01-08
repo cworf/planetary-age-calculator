@@ -1,7 +1,8 @@
 $(function(){
 	$( "#birthday" ).datepicker({
 		changeMonth: true,
-		changeYear: true
+		changeYear: true,
+		yearRange: "1920:2018"
     });
 	$('#user-input').submit(function(event){
 		event.preventDefault();
