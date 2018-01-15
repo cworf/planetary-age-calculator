@@ -11,7 +11,12 @@ $(function(){
 			console.log(birthday);
 		if (birthday && place) {
 			const person = new Person(birthday, place);
-			console.log(person);
+			$('.output').show();
+			for (var key in person) {
+				if (person.hasOwnProperty(key)) {
+					$(`#${key}`).text(person[key]);
+				}
+			}
 		} else {
 			alert('please fill out all fields');
 		}

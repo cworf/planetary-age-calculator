@@ -1,0 +1,11 @@
+.output {
+    display: grid;
+    grid-template: auto / repeat(5, 1fr);
+    text-align: center;
+    grid-gap: 10px;
+}
+
+.output div {
+    border: 1px solid;
+    padding: 15px;
+}
