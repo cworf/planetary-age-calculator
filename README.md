@@ -1,4 +1,4 @@
-### JS Week 2 Code Review - Epicodus
+### JS Week 1 Code Review - Epicodus
 
 # Planetary Age Calculator
 
